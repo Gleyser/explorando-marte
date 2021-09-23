@@ -1,6 +1,5 @@
 package gleyser.explorandomarte.controller;
 
-import gleyser.explorandomarte.dto.LocalizacaoDTO;
 import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.service.MalhaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,22 @@ public class MalhaController {
 	@GetMapping
     public List<MalhaDTO> retornaMalhas() {
 		return this.malhaService.retornaMalhas();
-       
-        		
-        		
-    }
+	}
+
+	@GetMapping("/{id}")
+	public MalhaDTO recuperaMalhaPeloId(@PathVariable Long id) {
+		return this.malhaService.recuperaMalhaPeloId(id);
+	}
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void deletaMalhaPeloId(@PathVariable Long id){
+		return this.malhaService.deletaMalhaPeloId(id);
+	}
+
+	@PutMapping("/{id}")
+	public ProductDto atualizaMalhaPeloId(@PathVariable Long id, @Valid @RequestBody MalhaDTO malhaDTO) {
+		return this.malhaService.atualizaMalhaPeloId(id, malhaDTO);
+	}
 
 }

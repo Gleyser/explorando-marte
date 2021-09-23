@@ -37,4 +37,13 @@ public class MalhaService {
 				.collect(Collectors.toList());
 
 	}
+
+	public MalhaDTO recuperaMalhaPeloId(Long id) {
+	}
+
+	public void deletaMalhaPeloId(Long id) {
+	}
+
+	public ProductDto atualizaMalhaPeloId(Long id, MalhaDTO malhaDTO) {
+	}
 }
