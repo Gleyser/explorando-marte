@@ -14,7 +14,7 @@ public class Sonda {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
-    private Localizacao posicaoAtual;
+    private Localizacao localizacaoAtual;
 
     @Enumerated(EnumType.STRING)
     private Direcao direcao;
@@ -27,12 +27,12 @@ public class Sonda {
         this.id = id;
     }
 
-    public Localizacao getPosicaoAtual() {
-        return posicaoAtual;
+    public Localizacao getLocalizacaoAtual() {
+        return localizacaoAtual;
     }
 
-    public void setPosicaoAtual(Localizacao posicaoAtual) {
-        this.posicaoAtual = posicaoAtual;
+    public void setLocalizacaoAtual(Localizacao localizacaoAtual) {
+        this.localizacaoAtual = localizacaoAtual;
     }
 
     public Direcao getDirecao() {

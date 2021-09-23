@@ -1,6 +1,6 @@
 package gleyser.explorandomarte.controller;
 
-import gleyser.explorandomarte.dto.MalhaDTO;
+import gleyser.explorandomarte.dto.SondaDTO;
 import gleyser.explorandomarte.service.SondaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

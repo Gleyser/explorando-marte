@@ -14,10 +14,12 @@ import javax.validation.constraints.NotNull;
 public class SondaDTO {
     private Long id;
 
-    @NotNull(message = "A posicao Atual não pode ser nulo")
-    @Valid
-    private LocalizacaoDTO posicaoAtual;
-
     @NotNull(message = "A direcao não pode ser nulo")
     private Direcao direcao;
+
+    @NotNull(message = "A posicao Atual não pode ser nulo")
+    @Valid
+    private LocalizacaoDTO localizacaoAtual;
+
+
 }
