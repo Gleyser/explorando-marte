@@ -1,6 +1,7 @@
 package gleyser.explorandomarte.controller;
 
 import gleyser.explorandomarte.dto.MalhaDTO;
+import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.service.MalhaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,18 +34,18 @@ public class MalhaController {
 	}
 
 	@GetMapping("/{id}")
-	public MalhaDTO recuperaMalhaPeloId(@PathVariable Long id) {
+	public MalhaDTO recuperaMalhaPeloId(@PathVariable Long id) throws MalhaNaoEncontradaException {
 		return this.malhaService.recuperaMalhaPeloId(id);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void deletaMalhaPeloId(@PathVariable Long id){
-		return this.malhaService.deletaMalhaPeloId(id);
+	public void deletaMalhaPeloId(@PathVariable Long id) throws MalhaNaoEncontradaException {
+		this.malhaService.deletaMalhaPeloId(id);
 	}
 
 	@PutMapping("/{id}")
-	public ProductDto atualizaMalhaPeloId(@PathVariable Long id, @Valid @RequestBody MalhaDTO malhaDTO) {
+	public MalhaDTO atualizaMalhaPeloId(@PathVariable Long id, @Valid @RequestBody MalhaDTO malhaDTO) throws MalhaNaoEncontradaException {
 		return this.malhaService.atualizaMalhaPeloId(id, malhaDTO);
 	}
 

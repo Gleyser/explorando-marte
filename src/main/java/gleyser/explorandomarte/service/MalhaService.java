@@ -1,6 +1,7 @@
 package gleyser.explorandomarte.service;
 
 import gleyser.explorandomarte.entity.Malha;
+import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,12 +39,29 @@ public class MalhaService {
 
 	}
 
-	public MalhaDTO recuperaMalhaPeloId(Long id) {
+	public MalhaDTO recuperaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
+		Malha malhaRecuperada = retornaMalhaPeloId(id);
+		MalhaDTO malhaRetorno = this.malhaMapper.toDTO(malhaRecuperada);
+		return malhaRetorno;
 	}
 
-	public void deletaMalhaPeloId(Long id) {
+	public void deletaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
+		Malha malhaRecuperada = retornaMalhaPeloId(id);
+		this.malhaRepository.delete(malhaRecuperada);
 	}
 
-	public ProductDto atualizaMalhaPeloId(Long id, MalhaDTO malhaDTO) {
+	public MalhaDTO atualizaMalhaPeloId(Long id, MalhaDTO malhaDTO) throws MalhaNaoEncontradaException {
+		retornaMalhaPeloId(id);
+		Malha malhaASerAtualizada = this.malhaMapper.toModel(malhaDTO);
+		malhaASerAtualizada.setId(id);
+		Malha malhaAtualizada = this.malhaRepository.save(malhaASerAtualizada);
+		MalhaDTO malhaRetorno = this.malhaMapper.toDTO(malhaAtualizada);
+		return malhaRetorno;
+
+	}
+
+	private Malha retornaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
+		return this.malhaRepository.findById(id).
+				orElseThrow(() -> new MalhaNaoEncontradaException(id));
 	}
 }

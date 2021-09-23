@@ -21,7 +21,11 @@ public class Malha {
 	public Long getId() {
 		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Localizacao getPontoInferiorEsquerdo() {
 		return pontoInferiorEsquerdo;
 	}
@@ -36,6 +40,24 @@ public class Malha {
 
 	public void setPontoSuperiorDireito(Localizacao pontoSuperiorDireito) {
 		this.pontoSuperiorDireito = pontoSuperiorDireito;
-	}	
+	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Malha malha = (Malha) o;
+
+		if (id != null ? !id.equals(malha.id) : malha.id != null) return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (pontoInferiorEsquerdo != null ? pontoInferiorEsquerdo.hashCode() : 0);
+		result = 31 * result + (pontoSuperiorDireito != null ? pontoSuperiorDireito.hashCode() : 0);
+		return result;
+	}
 }
