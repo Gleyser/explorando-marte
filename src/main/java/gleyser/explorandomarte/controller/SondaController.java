@@ -3,10 +3,10 @@ package gleyser.explorandomarte.controller;
 import gleyser.explorandomarte.dto.SondaDTO;
 import gleyser.explorandomarte.service.SondaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,5 +23,12 @@ public class SondaController {
     @GetMapping
     public List<SondaDTO> retornaSondas() {
         return this.sondaService.retornaSondas();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) {
+        return this.sondaService.cadastrarSonda(sondaDTO);
+
     }
 }
