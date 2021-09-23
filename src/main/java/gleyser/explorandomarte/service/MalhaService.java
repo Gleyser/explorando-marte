@@ -2,12 +2,13 @@ package gleyser.explorandomarte.service;
 
 import org.springframework.stereotype.Service;
 
+import gleyser.explorandomarte.dto.MalhaDTO;
+
 @Service
 public class MalhaService {
 
-	public String cadastrarMalha() {
-		String message = "Malha inserida com o id ";
-		return message;
+	public MalhaDTO cadastrarMalha(MalhaDTO malhaDTO) {
+		return malhaDTO;
 	}
 
 }
