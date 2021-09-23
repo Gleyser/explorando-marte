@@ -1,4 +1,4 @@
-package gleyser.explorandomarte.exception;
+package gleyser.explorandomarte.validation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +20,14 @@ public class ValidationHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
-		Map<String, String> errors = new HashMap<>();
-		ex.getBindingResult().getAllErrors().forEach((error) ->{
-			String fieldName = "Erro no ";
-			String atributo = ((FieldError) error).getField();
-			fieldName += atributo;
-			String message = error.getDefaultMessage();
+		Map<String, String> erros = new HashMap<>();
+		ex.getBindingResult().getAllErrors().forEach((erro) ->{
 			
-			errors.put(fieldName, message);
+			String atributoComErro = ((FieldError) erro).getField();			
+			String mensagem= erro.getDefaultMessage();			
+			erros.put(atributoComErro, mensagem);
 		});
-		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Object>(erros, HttpStatus.BAD_REQUEST);
 	}
 
 }
