@@ -1,24 +1,14 @@
 package gleyser.explorandomarte.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
-
-import gleyser.explorandomarte.dto.LocalizacaoDTO;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 @Entity
 public class Localizacao {
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
 	@Column(nullable = false)
 	private Integer coordenadaX;
 	
@@ -27,7 +17,7 @@ public class Localizacao {
 
 	public Long getId() {
 		return id;
-	}	
+	}
 
 	public Integer getCoordenadaX() {
 		return coordenadaX;
@@ -43,6 +33,25 @@ public class Localizacao {
 
 	public void setCoordenadaY(Integer coordenadaY) {
 		this.coordenadaY = coordenadaY;
-	}		
+	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Localizacao that = (Localizacao) o;
+
+		if (id != null ? !id.equals(that.id) : that.id != null) return false;
+		if (coordenadaX != null ? !coordenadaX.equals(that.coordenadaX) : that.coordenadaX != null) return false;
+		return coordenadaY != null ? coordenadaY.equals(that.coordenadaY) : that.coordenadaY == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (coordenadaX != null ? coordenadaX.hashCode() : 0);
+		result = 31 * result + (coordenadaY != null ? coordenadaY.hashCode() : 0);
+		return result;
+	}
 }

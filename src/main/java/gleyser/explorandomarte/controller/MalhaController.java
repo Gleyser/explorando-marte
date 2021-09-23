@@ -22,8 +22,8 @@ public class MalhaController {
 	private final MalhaService malhaService;
 	
 	@Autowired
-	public MalhaController() {
-		this.malhaService = new MalhaService();
+	public MalhaController(MalhaService malhaService) {		
+		this.malhaService = malhaService;
 	}
 
 	@PostMapping
@@ -33,6 +33,7 @@ public class MalhaController {
         		
     }
 	
+
 	@GetMapping
     public MalhaDTO retornaMalha() {
 		LocalizacaoDTO l1 = new LocalizacaoDTO(0, 0);
