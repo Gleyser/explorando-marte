@@ -8,6 +8,9 @@ import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.mapper.MalhaMapper;
 import gleyser.explorandomarte.repository.MalhaRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class MalhaService {	
 	
@@ -20,7 +23,6 @@ public class MalhaService {
 		this.malhaRepository = malhaRepository;
 	}
 
-
 	public MalhaDTO cadastrarMalha(MalhaDTO malhaDTO) {
 		Malha malhaParaSalvar = this.malhaMapper.toModel(malhaDTO);
 		Malha malhaSalva = this.malhaRepository.save(malhaParaSalvar);
@@ -28,4 +30,11 @@ public class MalhaService {
 		return malhaRetorno;
 	}
 
+	public List<MalhaDTO> retornaMalhas() {
+		List<Malha> todasAsMalhas = this.malhaRepository.findAll();
+		return todasAsMalhas.stream()
+				.map(this.malhaMapper::toDTO)
+				.collect(Collectors.toList());
+
+	}
 }
