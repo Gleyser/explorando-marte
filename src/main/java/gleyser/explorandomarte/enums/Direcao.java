@@ -2,49 +2,49 @@ package gleyser.explorandomarte.enums;
 
 public enum Direcao {
     NORTH {
-        public Direcao moveParaDireita() {
+        public Direcao viraParaDireita() {
             return Direcao.EAST;
         }
 
-        public Direcao moveParaEsquerda() {
+        public Direcao viraParaEsquerda() {
             return Direcao.WEST;
         }
     }
     ,
     WEST {
-        public Direcao moveParaDireita() {
+        public Direcao viraParaDireita() {
             return Direcao.NORTH;
         }
 
-        public Direcao moveParaEsquerda() {
+        public Direcao viraParaEsquerda() {
             return Direcao.SOUTH;
         }
 
     }
     ,
     SOUTH {
-        public Direcao moveParaDireita() {
+        public Direcao viraParaDireita() {
             return Direcao.WEST;
         }
 
-        public Direcao moveParaEsquerda() {
+        public Direcao viraParaEsquerda() {
             return Direcao.EAST;
         }
 
     }
     ,
     EAST {
-        public Direcao moveParaDireita() {
+        public Direcao viraParaDireita() {
             return Direcao.SOUTH;
         }
 
-        public Direcao moveParaEsquerda() {
+        public Direcao viraParaEsquerda() {
             return Direcao.NORTH;
         }
 
     };
 
-    public abstract Direcao moveParaDireita();
-    public abstract Direcao moveParaEsquerda();
+    public abstract Direcao viraParaDireita();
+    public abstract Direcao viraParaEsquerda();
 
 }

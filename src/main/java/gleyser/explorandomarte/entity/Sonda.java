@@ -42,4 +42,12 @@ public class Sonda {
     public void setDirecao(Direcao direcao) {
         this.direcao = direcao;
     }
+
+    public void viraParaEsquerda(){
+        this.direcao = this.direcao.viraParaEsquerda();
+    }
+
+    public void viraParaDireita(){
+        this.direcao = this.direcao.viraParaDireita();
+    }
 }

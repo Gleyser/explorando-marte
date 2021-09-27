@@ -61,11 +61,24 @@ public class SondaService {
         return sondaRetorno;
     }
 
+    public SondaDTO viraSondaParaEsquerda(Long id) throws SondaNaoEncontradaException {
+        Sonda sondaASerVirada = retornaSondaPeloIdAux(id);
+        sondaASerVirada.viraParaEsquerda();
+        Sonda sondaAtualizada = this.sondaRepository.save(sondaASerVirada);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaAtualizada);
+        return sondaRetorno;
+    }
+
+    public SondaDTO viraSondaParaDireita(Long id) throws SondaNaoEncontradaException {
+        Sonda sondaASerVirada = retornaSondaPeloIdAux(id);
+        sondaASerVirada.viraParaDireita();
+        Sonda sondaAtualizada = this.sondaRepository.save(sondaASerVirada);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaAtualizada);
+        return sondaRetorno;
+    }
 
     private Sonda retornaSondaPeloIdAux(Long id) throws SondaNaoEncontradaException {
         return this.sondaRepository.findById(id).
                 orElseThrow(() -> new SondaNaoEncontradaException());
     }
-
-
 }
