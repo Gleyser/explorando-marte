@@ -8,11 +8,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import gleyser.explorandomarte.entity.Localizacao;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class MalhaDTO {

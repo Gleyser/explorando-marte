@@ -1,14 +1,13 @@
 package gleyser.explorandomarte.dto;
 
 import gleyser.explorandomarte.enums.Direcao;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SondaDTO {
