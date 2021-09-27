@@ -1,5 +1,7 @@
 package gleyser.explorandomarte.enums;
 
+import gleyser.explorandomarte.entity.Localizacao;
+
 public enum Direcao {
     NORTH {
         public Direcao viraParaDireita() {
@@ -8,6 +10,10 @@ public enum Direcao {
 
         public Direcao viraParaEsquerda() {
             return Direcao.WEST;
+        }
+
+        public Localizacao movimenta(Localizacao localizacao) {
+            return
         }
     }
     ,
@@ -18,6 +24,10 @@ public enum Direcao {
 
         public Direcao viraParaEsquerda() {
             return Direcao.SOUTH;
+        }
+
+        public Localizacao movimenta(Localizacao localizacao) {
+            return
         }
 
     }
@@ -31,6 +41,10 @@ public enum Direcao {
             return Direcao.EAST;
         }
 
+        public Localizacao movimenta(Localizacao localizacao) {
+            return
+        }
+
     }
     ,
     EAST {
@@ -42,9 +56,14 @@ public enum Direcao {
             return Direcao.NORTH;
         }
 
+        public Localizacao movimenta(Localizacao localizacao) {
+            return
+        }
+
     };
 
     public abstract Direcao viraParaDireita();
     public abstract Direcao viraParaEsquerda();
+    public abstract Localizacao movimenta(Localizacao localizacao);
 
 }
