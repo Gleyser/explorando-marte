@@ -1,7 +1,10 @@
 package gleyser.explorandomarte.service;
 
+import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
+import gleyser.explorandomarte.entity.Malha;
 import gleyser.explorandomarte.entity.Sonda;
+import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.mapper.SondaMapper;
 import gleyser.explorandomarte.repository.SondaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +40,32 @@ public class SondaService {
         return sondaRetorno;
 
     }
+
+    public SondaDTO recuperaMalhaPeloId(Long id) throws SondaNaoEncontradaException {
+       Sonda sondaRecuperada = retornaSondaPeloIdAux(id);
+       SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaRecuperada);
+       return sondaRetorno;
+    }
+
+    public void deletaMalhaPeloId(Long id) throws SondaNaoEncontradaException {
+        Sonda sondaRecuperada = retornaSondaPeloIdAux(id);
+        this.sondaRepository.delete(sondaRecuperada);
+    }
+
+    public SondaDTO atualizaSondaPeloId(Long id, SondaDTO sondaDTO) throws SondaNaoEncontradaException {
+        retornaSondaPeloIdAux(id);
+        Sonda sondaASerAtualizada = this.sondaMapper.toModel(sondaDTO);
+        sondaASerAtualizada.setId(id);
+        Sonda sondaAtualizada = this.sondaRepository.save(sondaASerAtualizada);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaAtualizada);
+        return sondaRetorno;
+    }
+
+
+    private Sonda retornaSondaPeloIdAux(Long id) throws SondaNaoEncontradaException {
+        return this.sondaRepository.findById(id).
+                orElseThrow(() -> new SondaNaoEncontradaException());
+    }
+
+
 }

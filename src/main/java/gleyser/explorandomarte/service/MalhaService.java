@@ -62,6 +62,6 @@ public class MalhaService {
 
 	private Malha retornaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
 		return this.malhaRepository.findById(id).
-				orElseThrow(() -> new MalhaNaoEncontradaException(id));
+				orElseThrow(() -> new MalhaNaoEncontradaException());
 	}
 }

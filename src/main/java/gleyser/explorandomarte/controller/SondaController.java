@@ -1,6 +1,9 @@
 package gleyser.explorandomarte.controller;
 
+import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
+import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
+import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.service.SondaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +32,23 @@ public class SondaController {
     @ResponseStatus(HttpStatus.CREATED)
     public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) {
         return this.sondaService.cadastrarSonda(sondaDTO);
-
     }
+
+    @GetMapping("/{id}")
+    public SondaDTO recuperaSondaPeloId(@PathVariable Long id) throws SondaNaoEncontradaException {
+        return this.sondaService.recuperaMalhaPeloId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletaSondaPeloId(@PathVariable Long id) throws SondaNaoEncontradaException {
+        this.sondaService.deletaMalhaPeloId(id);
+    }
+
+    @PutMapping("/{id}")
+    public SondaDTO atualizaMalhaPeloId(@PathVariable Long id, @Valid @RequestBody SondaDTO sondaDTO) throws SondaNaoEncontradaException {
+        return this.sondaService.atualizaSondaPeloId(id, sondaDTO);
+    }
+
+
 }
