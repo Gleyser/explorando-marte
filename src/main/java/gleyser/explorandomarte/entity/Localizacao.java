@@ -35,6 +35,22 @@ public class Localizacao {
 		this.coordenadaY = coordenadaY;
 	}
 
+	public void incrementaCoordenadaX(){
+		this.coordenadaX++;
+	}
+
+	public void incrementaCoordenadaY(){
+		this.coordenadaY++;
+	}
+
+	public void decrementaCoordenadaX(){
+		this.coordenadaX--;
+	}
+
+	public void decrementaCoordenadaY(){
+		this.coordenadaX--;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
