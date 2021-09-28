@@ -48,7 +48,7 @@ public class Localizacao {
 	}
 
 	public void decrementaCoordenadaY(){
-		this.coordenadaX--;
+		this.coordenadaY--;
 	}
 
 	@Override

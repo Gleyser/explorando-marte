@@ -77,8 +77,18 @@ public class SondaService {
         return sondaRetorno;
     }
 
+    public SondaDTO moverASonda(Long id) throws SondaNaoEncontradaException {
+        Sonda sondaASerMovida = retornaSondaPeloIdAux(id);
+        sondaASerMovida.mover();
+        Sonda sondaMovida = this.sondaRepository.save(sondaASerMovida);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaMovida);
+        return sondaRetorno;
+    }
+
     private Sonda retornaSondaPeloIdAux(Long id) throws SondaNaoEncontradaException {
         return this.sondaRepository.findById(id).
                 orElseThrow(() -> new SondaNaoEncontradaException());
     }
+
+
 }

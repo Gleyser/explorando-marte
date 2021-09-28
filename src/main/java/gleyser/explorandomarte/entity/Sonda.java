@@ -50,4 +50,8 @@ public class Sonda {
     public void viraParaDireita(){
         this.direcao = this.direcao.viraParaDireita();
     }
+
+    public void mover(){
+        this.localizacaoAtual = this.direcao.movimenta(this.localizacaoAtual);
+    }
 }

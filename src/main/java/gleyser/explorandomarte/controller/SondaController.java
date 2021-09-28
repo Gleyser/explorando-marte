@@ -50,14 +50,19 @@ public class SondaController {
         return this.sondaService.atualizaSondaPeloId(id, sondaDTO);
     }
 
-    @PutMapping("/{id}/paraesquerda")
-    public SondaDTO viraSondaParaEsquerda(@PathVariable Long id) throws SondaNaoEncontradaException {
+    @PutMapping("/{id}/esquerda")
+    public SondaDTO virarSondaParaEsquerda(@PathVariable Long id) throws SondaNaoEncontradaException {
         return this.sondaService.viraSondaParaEsquerda(id);
     }
 
-    @PutMapping("/{id}/paradireita")
-    public SondaDTO viraSondaParaDireita(@PathVariable Long id) throws SondaNaoEncontradaException {
+    @PutMapping("/{id}/direita")
+    public SondaDTO virarSondaParaDireita(@PathVariable Long id) throws SondaNaoEncontradaException {
         return this.sondaService.viraSondaParaDireita(id);
+    }
+
+    @PutMapping("/{id}/mover")
+    public SondaDTO moverASonda(@PathVariable Long id) throws SondaNaoEncontradaException {
+        return this.sondaService.moverASonda(id);
     }
 
 
