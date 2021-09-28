@@ -87,8 +87,13 @@ public class SondaService {
     }
 
     public SondaDTO processarInstrucoes(Long id, List<String> instrucoes) throws SondaNaoEncontradaException {
+        List<Acao> acoes = instrucoes.stream().map(x -> Acao.valueOf(x)).collect(Collectors.toList());
         Sonda sondaASerMovida = retornaSondaPeloIdAux(id);
-        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaASerMovida);
+        for (Acao acao : acoes){
+            acao.executaAcao(sondaASerMovida);
+        }
+        Sonda sondaMovida = this.sondaRepository.save(sondaASerMovida);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaMovida);
         return sondaRetorno;
     }
 
