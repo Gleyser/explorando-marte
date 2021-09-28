@@ -2,6 +2,7 @@ package gleyser.explorandomarte.controller;
 
 import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
+import gleyser.explorandomarte.enums.Acao;
 import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.service.SondaService;
@@ -64,6 +65,13 @@ public class SondaController {
     public SondaDTO moverASonda(@PathVariable Long id) throws SondaNaoEncontradaException {
         return this.sondaService.moverASonda(id);
     }
+
+    @PutMapping("/{id}/instrucoes")
+    public SondaDTO processarInstrucoes(@PathVariable Long id, @RequestBody List<String> instrucoes) throws SondaNaoEncontradaException {
+        return this.sondaService.processarInstrucoes(id, instrucoes);
+    }
+
+
 
 
 }

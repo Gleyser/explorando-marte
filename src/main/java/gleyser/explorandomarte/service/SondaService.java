@@ -4,6 +4,7 @@ import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
 import gleyser.explorandomarte.entity.Malha;
 import gleyser.explorandomarte.entity.Sonda;
+import gleyser.explorandomarte.enums.Acao;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.mapper.SondaMapper;
 import gleyser.explorandomarte.repository.SondaRepository;
@@ -85,10 +86,17 @@ public class SondaService {
         return sondaRetorno;
     }
 
+    public SondaDTO processarInstrucoes(Long id, List<String> instrucoes) throws SondaNaoEncontradaException {
+        Sonda sondaASerMovida = retornaSondaPeloIdAux(id);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaASerMovida);
+        return sondaRetorno;
+    }
+
     private Sonda retornaSondaPeloIdAux(Long id) throws SondaNaoEncontradaException {
         return this.sondaRepository.findById(id).
                 orElseThrow(() -> new SondaNaoEncontradaException());
     }
+
 
 
 }
