@@ -5,6 +5,7 @@ import gleyser.explorandomarte.entity.Localizacao;
 import gleyser.explorandomarte.entity.Malha;
 import gleyser.explorandomarte.entity.Sonda;
 import gleyser.explorandomarte.enums.Acao;
+import gleyser.explorandomarte.exception.ColisaoException;
 import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.mapper.SondaMapper;
@@ -40,9 +41,10 @@ public class SondaService {
 
     }
 
-    public SondaDTO cadastrarSonda(SondaDTO sondaDTO) throws MalhaNaoEncontradaException {
+    public SondaDTO cadastrarSonda(SondaDTO sondaDTO) throws MalhaNaoEncontradaException, ColisaoException {
         Malha malha = this.malhaService.retornaMalhaPeloId(sondaDTO.getIdMalha());
         Sonda sondaParaSalvar = this.sondaMapper.toModel(sondaDTO);
+        sondaParaSalvar.setMalha(malha);
         Localizacao localizacaoRecuperada = this.localizacaoService.retornaLocalizacao(sondaDTO.getLocalizacaoAtual());
         if (localizacaoRecuperada != null){
             sondaParaSalvar.setLocalizacaoAtual(localizacaoRecuperada);
@@ -50,10 +52,8 @@ public class SondaService {
         Sonda sondaSalva = this.sondaRepository.save(sondaParaSalvar);
         malha.salvarSonda(sondaSalva);
         this.malhaService.salvarMalha(malha);
-
-
-
         SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaSalva);
+        sondaRetorno.setIdMalha(malha.getId());
         return sondaRetorno;
 
     }

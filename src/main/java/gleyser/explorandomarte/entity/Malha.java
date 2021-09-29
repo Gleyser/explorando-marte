@@ -1,5 +1,6 @@
 package gleyser.explorandomarte.entity;
 
+import gleyser.explorandomarte.exception.ColisaoException;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -58,7 +59,10 @@ public class Malha {
 		this.sondas = sondas;
 	}
 
-	public void salvarSonda(Sonda sonda) {
+	public void salvarSonda(Sonda sonda) throws ColisaoException {
+		if (this.sondas.containsKey(sonda.getLocalizacaoAtual())){
+			throw new ColisaoException();
+		}
 		this.sondas.put(sonda.getLocalizacaoAtual(), sonda);
 	}
 

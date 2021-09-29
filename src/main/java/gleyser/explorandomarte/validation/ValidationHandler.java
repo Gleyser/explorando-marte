@@ -1,5 +1,6 @@
 package gleyser.explorandomarte.validation;
 
+import gleyser.explorandomarte.exception.ColisaoException;
 import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import org.springframework.http.HttpHeaders;
@@ -45,6 +46,13 @@ public class ValidationHandler extends ResponseEntityExceptionHandler {
 		Map<String, String> erros = new HashMap<>();
 		erros.put("Erro", "Sonda não encontrada");
 		return new ResponseEntity<Object>(erros, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(ColisaoException.class)
+	public final ResponseEntity<Object> handleColisaoException() {
+		Map<String, String> erros = new HashMap<>();
+		erros.put("Erro", "Colisao encontrada - posicao ja ocupada na malha");
+		return new ResponseEntity<Object>(erros, HttpStatus.BAD_GATEWAY);
 	}
 
 }

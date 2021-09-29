@@ -3,6 +3,7 @@ package gleyser.explorandomarte.controller;
 import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
 import gleyser.explorandomarte.enums.Acao;
+import gleyser.explorandomarte.exception.ColisaoException;
 import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.service.SondaService;
@@ -31,7 +32,7 @@ public class SondaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) throws MalhaNaoEncontradaException {
+    public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) throws MalhaNaoEncontradaException, ColisaoException {
         return this.sondaService.cadastrarSonda(sondaDTO);
     }
 

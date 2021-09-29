@@ -65,7 +65,7 @@ public class MalhaService {
 				orElseThrow(() -> new MalhaNaoEncontradaException());
 	}
 
-	protected void salvarMalha(Malha malha){
-		this.malhaRepository.save(malha);
+	protected Malha salvarMalha(Malha malha){
+		return this.malhaRepository.save(malha);
 	}
 }
