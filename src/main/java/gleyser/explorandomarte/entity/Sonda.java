@@ -13,11 +13,16 @@ public class Sonda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "localizacao_id")
     private Localizacao localizacaoAtual;
 
     @Enumerated(EnumType.STRING)
     private Direcao direcao;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "malha_id")
+    private Malha malha;
 
     public Long getId() {
         return id;
@@ -53,5 +58,13 @@ public class Sonda {
 
     public void mover(){
         this.localizacaoAtual = this.direcao.movimenta(this.localizacaoAtual);
+    }
+
+    public Malha getMalha() {
+        return malha;
+    }
+
+    public void setMalha(Malha malha) {
+        this.malha = malha;
     }
 }

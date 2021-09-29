@@ -1,12 +1,14 @@
 package gleyser.explorandomarte.service;
 
-import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
+import gleyser.explorandomarte.entity.Localizacao;
 import gleyser.explorandomarte.entity.Malha;
 import gleyser.explorandomarte.entity.Sonda;
 import gleyser.explorandomarte.enums.Acao;
+import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.mapper.SondaMapper;
+import gleyser.explorandomarte.repository.LocalizacaoRepository;
 import gleyser.explorandomarte.repository.SondaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +20,16 @@ import java.util.stream.Collectors;
 public class SondaService {
 
     private final SondaRepository sondaRepository;
+    private final LocalizacaoService localizacaoService;
+    private final MalhaService malhaService;
 
     private final SondaMapper sondaMapper = SondaMapper.INSTANCE;
 
     @Autowired
-    public SondaService(SondaRepository sondaRepository) {
+    public SondaService(SondaRepository sondaRepository, MalhaService malhaService, LocalizacaoService localizacaoService) {
         this.sondaRepository = sondaRepository;
+        this.malhaService = malhaService;
+        this.localizacaoService = localizacaoService;
     }
 
     public List<SondaDTO> retornaSondas() {
@@ -34,9 +40,19 @@ public class SondaService {
 
     }
 
-    public SondaDTO cadastrarSonda(SondaDTO sondaDTO) {
+    public SondaDTO cadastrarSonda(SondaDTO sondaDTO) throws MalhaNaoEncontradaException {
+        Malha malha = this.malhaService.retornaMalhaPeloId(sondaDTO.getIdMalha());
         Sonda sondaParaSalvar = this.sondaMapper.toModel(sondaDTO);
+        Localizacao localizacaoRecuperada = this.localizacaoService.retornaLocalizacao(sondaDTO.getLocalizacaoAtual());
+        if (localizacaoRecuperada != null){
+            sondaParaSalvar.setLocalizacaoAtual(localizacaoRecuperada);
+        }
         Sonda sondaSalva = this.sondaRepository.save(sondaParaSalvar);
+        malha.salvarSonda(sondaSalva);
+        this.malhaService.salvarMalha(malha);
+
+
+
         SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaSalva);
         return sondaRetorno;
 

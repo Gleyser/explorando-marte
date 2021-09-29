@@ -31,7 +31,7 @@ public class SondaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) {
+    public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) throws MalhaNaoEncontradaException {
         return this.sondaService.cadastrarSonda(sondaDTO);
     }
 

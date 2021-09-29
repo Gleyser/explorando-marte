@@ -60,8 +60,12 @@ public class MalhaService {
 
 	}
 
-	private Malha retornaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
+	protected Malha retornaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
 		return this.malhaRepository.findById(id).
 				orElseThrow(() -> new MalhaNaoEncontradaException());
+	}
+
+	protected void salvarMalha(Malha malha){
+		this.malhaRepository.save(malha);
 	}
 }

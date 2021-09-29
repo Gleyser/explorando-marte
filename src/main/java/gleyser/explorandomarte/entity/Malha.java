@@ -3,6 +3,7 @@ package gleyser.explorandomarte.entity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @NoArgsConstructor
@@ -12,11 +13,18 @@ public class Malha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
     private Localizacao pontoInferiorEsquerdo;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
     private Localizacao pontoSuperiorDireito;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "malha_sonda_mapping",
+			joinColumns = {@JoinColumn(name = "malha_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "sonda_id", referencedColumnName = "id")})
+	@MapKeyJoinColumn(name = "localizacao_id")
+	private Map<Localizacao, Sonda> sondas;
 
 	public Long getId() {
 		return id;
@@ -42,6 +50,18 @@ public class Malha {
 		this.pontoSuperiorDireito = pontoSuperiorDireito;
 	}
 
+	public Map<Localizacao, Sonda> getSondas() {
+		return sondas;
+	}
+
+	public void setSondas(Map<Localizacao, Sonda> sondas) {
+		this.sondas = sondas;
+	}
+
+	public void salvarSonda(Sonda sonda) {
+		this.sondas.put(sonda.getLocalizacaoAtual(), sonda);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -60,4 +80,6 @@ public class Malha {
 		result = 31 * result + (pontoSuperiorDireito != null ? pontoSuperiorDireito.hashCode() : 0);
 		return result;
 	}
+
+
 }
