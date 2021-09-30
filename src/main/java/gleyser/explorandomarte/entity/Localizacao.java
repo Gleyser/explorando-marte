@@ -57,7 +57,6 @@ public class Localizacao {
 	@Override
 	public boolean equals(Object o) {
 		Localizacao that = (Localizacao) o;
-		//System.out.println(this);
 		return this.getCoordenadaX().equals(that.getCoordenadaX())
 				&& this.getCoordenadaY().equals((that.getCoordenadaY()));
 

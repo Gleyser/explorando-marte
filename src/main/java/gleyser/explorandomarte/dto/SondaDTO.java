@@ -20,5 +20,9 @@ public class SondaDTO {
     @Valid
     private LocalizacaoDTO localizacaoAtual;
 
+    @NotNull(message = "O id da malha não pode ser nulo")
+    @Valid
+    private Long idMalha;
+
 
 }

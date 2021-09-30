@@ -34,8 +34,8 @@ public class MalhaController {
 	}
 
 	@GetMapping("/{id}")
-	public MalhaDTO recuperaMalhaPeloId(@PathVariable Long id) throws MalhaNaoEncontradaException {
-		return this.malhaService.recuperaMalhaPeloId(id);
+	public MalhaDTO recuperaMalhaDTOPeloId(@PathVariable Long id) throws MalhaNaoEncontradaException {
+		return this.malhaService.recuperaMalhaDTOPeloId(id);
 	}
 
 	@DeleteMapping("/{id}")
@@ -44,9 +44,6 @@ public class MalhaController {
 		this.malhaService.deletaMalhaPeloId(id);
 	}
 
-	@PutMapping("/{id}")
-	public MalhaDTO atualizaMalhaPeloId(@PathVariable Long id, @Valid @RequestBody MalhaDTO malhaDTO) throws MalhaNaoEncontradaException {
-		return this.malhaService.atualizaMalhaPeloId(id, malhaDTO);
-	}
+
 
 }

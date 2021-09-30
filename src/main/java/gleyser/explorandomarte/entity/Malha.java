@@ -1,15 +1,9 @@
 package gleyser.explorandomarte.entity;
 
-import gleyser.explorandomarte.exception.ColisaoException;
-import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-<<<<<<< HEAD
-import java.util.List;
 import java.util.Map;
-=======
->>>>>>> parent of e11945c (Associando sonda com malha)
 
 @Entity
 @NoArgsConstructor
@@ -19,24 +13,19 @@ public class Malha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-<<<<<<< HEAD
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Localizacao pontoInferiorEsquerdo;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Localizacao pontoSuperiorDireito;
 
-	@OneToMany(mappedBy = "malha", cascade = {CascadeType.ALL})
-	private List<Sonda> sondas;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "malha_sonda_mapping",
+			joinColumns = {@JoinColumn(name = "malha_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "sonda_id", referencedColumnName = "id")})
+	@MapKeyJoinColumn(name = "localizacao_id")
+	private Map<Localizacao, Sonda> sondas;
 
-=======
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
-    private Localizacao pontoInferiorEsquerdo;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
-    private Localizacao pontoSuperiorDireito;
-
->>>>>>> parent of e11945c (Associando sonda com malha)
 	public Long getId() {
 		return id;
 	}
@@ -61,21 +50,26 @@ public class Malha {
 		this.pontoSuperiorDireito = pontoSuperiorDireito;
 	}
 
-<<<<<<< HEAD
-	public List<Sonda> getSondas() {
+	public Map<Localizacao, Sonda> getSondas() {
 		return sondas;
 	}
 
-	public void adicionaSonda(Sonda sonda) throws ColisaoException {
-		this.sondas.add(sonda);
+	public void setSondas(Map<Localizacao, Sonda> sondas) {
+		this.sondas = sondas;
 	}
 
-	public void removerSonda(Sonda sonda) throws SondaNaoEncontradaException {
-		this.sondas.remove(sonda);
+	public void salvarSonda(Sonda sonda) {
+		this.sondas.put(sonda.getLocalizacaoAtual(), sonda);
 	}
 
-=======
->>>>>>> parent of e11945c (Associando sonda com malha)
+	public Sonda retornaSonda(Localizacao localizacao){
+		return this.sondas.get(localizacao);
+	}
+
+	public Sonda removerSonda(Sonda sondaRecuperada) {
+		return this.sondas.remove(sondaRecuperada.getLocalizacaoAtual());
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -94,4 +88,5 @@ public class Malha {
 		result = 31 * result + (pontoSuperiorDireito != null ? pontoSuperiorDireito.hashCode() : 0);
 		return result;
 	}
+
 }

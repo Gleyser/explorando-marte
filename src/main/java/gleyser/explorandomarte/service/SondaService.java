@@ -5,18 +5,16 @@ import gleyser.explorandomarte.dto.SondaDTO;
 import gleyser.explorandomarte.entity.Malha;
 import gleyser.explorandomarte.entity.Sonda;
 import gleyser.explorandomarte.enums.Acao;
-<<<<<<< HEAD
+
 import gleyser.explorandomarte.exception.ColisaoException;
 import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
-=======
->>>>>>> parent of e11945c (Associando sonda com malha)
+
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import gleyser.explorandomarte.mapper.SondaMapper;
 import gleyser.explorandomarte.repository.SondaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +22,14 @@ import java.util.stream.Collectors;
 public class SondaService {
 
     private final SondaRepository sondaRepository;
+    private final MalhaService malhaService;
 
     private final SondaMapper sondaMapper = SondaMapper.INSTANCE;
 
     @Autowired
-    public SondaService(SondaRepository sondaRepository) {
+    public SondaService(SondaRepository sondaRepository, MalhaService malhaService) {
         this.sondaRepository = sondaRepository;
+        this.malhaService = malhaService;
     }
 
     public List<SondaDTO> retornaSondas() {
@@ -40,23 +40,15 @@ public class SondaService {
 
     }
 
-<<<<<<< HEAD
+
     public SondaDTO cadastrarSonda(SondaDTO sondaDTO) throws MalhaNaoEncontradaException, ColisaoException {
-        Malha malha = this.malhaService.retornaMalhaPeloId(sondaDTO.getIdMalha());
+        Long idDaMalha = sondaDTO.getIdMalha();
+        Malha malha = this.malhaService.retornaMalhaPeloId(idDaMalha);
         Sonda sondaParaSalvar = this.sondaMapper.toModel(sondaDTO);
         sondaParaSalvar.setMalha(malha);
-        Localizacao localizacaoRecuperada = this.localizacaoService.retornaLocalizacao(sondaDTO.getLocalizacaoAtual());
-        if (localizacaoRecuperada != null){
-            sondaParaSalvar.setLocalizacaoAtual(localizacaoRecuperada);
-        }
         malha.salvarSonda(sondaParaSalvar);
         Sonda sondaSalva = this.sondaRepository.save(sondaParaSalvar);
-        this.malhaService.salvarMalha(malha);
-=======
-    public SondaDTO cadastrarSonda(SondaDTO sondaDTO) {
-        Sonda sondaParaSalvar = this.sondaMapper.toModel(sondaDTO);
-        Sonda sondaSalva = this.sondaRepository.save(sondaParaSalvar);
->>>>>>> parent of e11945c (Associando sonda com malha)
+        this.malhaService.salvaMalha(malha);
         SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaSalva);
         return sondaRetorno;
 
@@ -72,7 +64,7 @@ public class SondaService {
         Sonda sondaRecuperada = retornaSondaPeloIdAux(id);
         Malha malha = this.malhaService.retornaMalhaPeloId(sondaRecuperada.getMalha().getId());
         malha.removerSonda(sondaRecuperada);
-        this.malhaService.salvarMalha(malha);
+        this.malhaService.salvaMalha(malha);
         this.sondaRepository.delete(sondaRecuperada);
 
     }
@@ -93,32 +85,22 @@ public class SondaService {
         return sondaRetorno;
     }
 
-    public SondaDTO moverASonda(Long id) throws SondaNaoEncontradaException, ColisaoException, MalhaNaoEncontradaException {
-        //Sonda sondaASerMovida = retornaSondaPeloIdAux(id);
-        //Malha malha = sondaASerMovida.getMalha();
-        //System.out.println(sondaASerMovida.getLocalizacaoAtual());
-        //sondaASerMovida.mover();
-        //System.out.println(sondaASerMovida.getLocalizacaoAtual());
-        //malha.salvarSonda(sondaASerMovida);
-        //this.malhaService.salvarMalha(malha);
-        //SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaASerMovida);
-        List<String> acoes = new ArrayList<String>();
-        acoes.add(Acao.M.toString());
-        return processarInstrucoes(id, acoes);
+    public SondaDTO moverASonda(Long id) throws SondaNaoEncontradaException {
+        Sonda sondaASerMovida = retornaSondaPeloIdAux(id);
+        sondaASerMovida.mover();
+        Sonda sondaMovida = this.sondaRepository.save(sondaASerMovida);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaMovida);
+        return sondaRetorno;
     }
 
-    public SondaDTO processarInstrucoes(Long id, List<String> instrucoes) throws SondaNaoEncontradaException, ColisaoException, MalhaNaoEncontradaException {
+    public SondaDTO processarInstrucoes(Long id, List<String> instrucoes) throws SondaNaoEncontradaException {
         List<Acao> acoes = instrucoes.stream().map(x -> Acao.valueOf(x)).collect(Collectors.toList());
         Sonda sondaASerMovida = retornaSondaPeloIdAux(id);
-        Malha malha = this.malhaService.retornaMalhaPeloId(sondaASerMovida.getMalha().getId());
         for (Acao acao : acoes){
-            //System.out.println(sondaASerMovida.getLocalizacaoAtual().toString());
-            sondaASerMovida = acao.executaAcao(sondaASerMovida);
-            //System.out.println(sondaASerMovida.getLocalizacaoAtual().toString());
-            malha.salvarSonda(sondaASerMovida);
+            acao.executaAcao(sondaASerMovida);
         }
-        this.malhaService.salvarMalha(malha);
-        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaASerMovida);
+        Sonda sondaMovida = this.sondaRepository.save(sondaASerMovida);
+        SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaMovida);
         return sondaRetorno;
     }
 
@@ -126,6 +108,8 @@ public class SondaService {
         return this.sondaRepository.findById(id).
                 orElseThrow(() -> new SondaNaoEncontradaException());
     }
+
+
 
 
 

@@ -169,46 +169,4 @@ class MalhaControllerTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
-
-
-
-    @Test
-    public void testaRecuperarMalhaPeloId() throws Exception {
-        // Given: promovendo o estado sob teste
-        malhaDTO.setId(1L);
-        given(malhaService.recuperaMalhaPeloId(1L)).willReturn(malhaDTO);
-
-        // When: acionando a unidade de trabalho ou método
-        MockHttpServletResponse response = mvc.perform(
-                get("/api/v1/malhas/1").accept(MediaType.APPLICATION_JSON)
-        )
-                .andReturn()
-                .getResponse();
-
-        // Then: verificando o comportamento desejado
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.getContentAsString())
-                .isEqualTo(
-                        json.write(malhaDTO).getJson()
-                );
-
-    }
-
-    @Test
-    public void testaRecuperarMalhaPeloId_MalhaInexistente() throws Exception {
-        // Given: promovendo o estado sob teste
-        given(malhaService.recuperaMalhaPeloId(1L)).willThrow(MalhaNaoEncontradaException.class);
-
-        // When: acionando a unidade de trabalho ou método
-        MockHttpServletResponse response = mvc.perform(
-                get("/api/v1/malhas/1").accept(MediaType.APPLICATION_JSON)
-        )
-                .andReturn()
-                .getResponse();
-
-        // Then: verificando o comportamento desejado
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
-
-    }
-
 }
