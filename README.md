@@ -80,7 +80,12 @@ O microserviço possui os seguintes endpoints para o recurso malha:
 | POST        |  /api/v1/malhas      |   Salva uma malha                         |
 | DELETE      |  /api/v1/malhas/{id} |   Deleta uma malha com o ID fornecido     |
 
-### GET 
+### Validações
+
+A API não permite cadastrar malha e sonda com localização nula ou negativo. Para cadastrar a sonsa é preciso informar o id de uma Malha cadastrada anteriormente.
+
+
+
 
 
 

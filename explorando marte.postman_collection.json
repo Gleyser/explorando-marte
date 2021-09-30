@@ -1,0 +1,182 @@
+{
+	"variables": [],
+	"info": {
+		"name": "explorando marte",
+		"_postman_id": "ecb5a62b-7188-ee1e-1f9a-74076729d3b7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "malhas",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/v1/malhas",
+					"request": {
+						"url": "http://localhost:8080/api/v1/malhas",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n    \"pontoInferiorEsquerdo\": {\n        \"coordenadaX\": 0,\n        \"coordenadaY\": 0\n    },\n    \"pontoSuperiorDireito\": {\n        \"coordenadaX\": 20,\n        \"coordenadaY\": 450\n    }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/malhas",
+					"request": {
+						"url": "http://localhost:8080/api/v1/malhas",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/malhas/1",
+					"request": {
+						"url": "http://localhost:8080/api/v1/malhas/2",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/malhas/2",
+					"request": {
+						"url": "http://localhost:8080/api/v1/malhas/2",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sondas",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/v1/sondas",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"direcao\": \"NORTH\",\n        \"localizacaoAtual\": {\n            \"coordenadaX\": 1,\n            \"coordenadaY\": 2\n        },\n        \"idMalha\": 1\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas/5",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas/5",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas/2",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas/2/paraesquerda",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas/1/esquerda",
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas/2/paradireita",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas/1/direita",
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas/1/instrucoes",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas/1/instrucoes",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"M\", \"L\"]\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/v1/sondas/1/mover",
+					"request": {
+						"url": "http://localhost:8080/api/v1/sondas/1/mover",
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
