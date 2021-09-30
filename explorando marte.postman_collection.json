@@ -25,7 +25,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"pontoInferiorEsquerdo\": {\n        \"coordenadaX\": 0,\n        \"coordenadaY\": 0\n    },\n    \"pontoSuperiorDireito\": {\n        \"coordenadaX\": 20,\n        \"coordenadaY\": 450\n    }\n}"
+							"raw": "{\n    \n    \"pontoInferiorEsquerdo\": {\n        \"coordenadaX\": 0,\n        \"coordenadaY\": 0\n    },\n    \"pontoSuperiorDireito\": {\n        \"coordenadaX\": -2,\n        \"coordenadaY\": 450\n    }\n}"
 						},
 						"description": ""
 					},

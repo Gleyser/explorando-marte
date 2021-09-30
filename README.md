@@ -83,7 +83,19 @@ O microserviço possui os seguintes endpoints para o recurso malha:
 ### Validações
 
 A API não permite cadastrar malha e sonda com localização nula ou negativo. Para cadastrar a sonsa é preciso informar o id de uma Malha cadastrada anteriormente.
+Exemplo com valores inválidos:
+```javascript
+{
 
+    "pontoInferiorEsquerdo": {
+        "coordenadaX": 0,
+        "coordenadaY": 0
+    },
+    "pontoSuperiorDireito": {
+        "coordenadaX": 20,
+        "coordenadaY": 450
+    }
+}
 
 
 
