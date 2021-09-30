@@ -13,14 +13,13 @@ public class Sonda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "localizacao_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Localizacao localizacaoAtual;
 
     @Enumerated(EnumType.STRING)
     private Direcao direcao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "malha_id")
     private Malha malha;
 

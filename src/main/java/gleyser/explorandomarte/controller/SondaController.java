@@ -38,18 +38,13 @@ public class SondaController {
 
     @GetMapping("/{id}")
     public SondaDTO recuperaSondaPeloId(@PathVariable Long id) throws SondaNaoEncontradaException {
-        return this.sondaService.recuperaMalhaPeloId(id);
+        return this.sondaService.recuperaSondaPeloId(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deletaSondaPeloId(@PathVariable Long id) throws SondaNaoEncontradaException {
-        this.sondaService.deletaMalhaPeloId(id);
-    }
-
-    @PutMapping("/{id}")
-    public SondaDTO atualizaMalhaPeloId(@PathVariable Long id, @Valid @RequestBody SondaDTO sondaDTO) throws SondaNaoEncontradaException {
-        return this.sondaService.atualizaSondaPeloId(id, sondaDTO);
+    public void deletaSondaPeloId(@PathVariable Long id) throws SondaNaoEncontradaException, MalhaNaoEncontradaException {
+        this.sondaService.deletaSondaPeloId(id);
     }
 
     @PutMapping("/{id}/esquerda")
