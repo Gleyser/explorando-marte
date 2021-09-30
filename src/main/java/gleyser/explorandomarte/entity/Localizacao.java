@@ -1,8 +1,11 @@
 package gleyser.explorandomarte.entity;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
+@ToString
 public class Localizacao {
 
 	@Id
@@ -54,21 +57,18 @@ public class Localizacao {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
 		Localizacao that = (Localizacao) o;
+		//System.out.println(this);
+		return this.getCoordenadaX().equals(that.getCoordenadaX())
+				&& this.getCoordenadaY().equals((that.getCoordenadaY()));
 
-		if (id != null ? !id.equals(that.id) : that.id != null) return false;
-		if (coordenadaX != null ? !coordenadaX.equals(that.coordenadaX) : that.coordenadaX != null) return false;
-		return coordenadaY != null ? coordenadaY.equals(that.coordenadaY) : that.coordenadaY == null;
+
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (coordenadaX != null ? coordenadaX.hashCode() : 0);
-		result = 31 * result + (coordenadaY != null ? coordenadaY.hashCode() : 0);
+		int result = coordenadaX.hashCode();
+		result = 31 * result + coordenadaY.hashCode();
 		return result;
 	}
 }

@@ -58,12 +58,12 @@ public class SondaController {
     }
 
     @PutMapping("/{id}/mover")
-    public SondaDTO moverASonda(@PathVariable Long id) throws SondaNaoEncontradaException {
+    public SondaDTO moverASonda(@PathVariable Long id) throws SondaNaoEncontradaException, ColisaoException, MalhaNaoEncontradaException {
         return this.sondaService.moverASonda(id);
     }
 
     @PutMapping("/{id}/instrucoes")
-    public SondaDTO processarInstrucoes(@PathVariable Long id, @RequestBody List<String> instrucoes) throws SondaNaoEncontradaException {
+    public SondaDTO processarInstrucoes(@PathVariable Long id, @RequestBody List<String> instrucoes) throws SondaNaoEncontradaException, ColisaoException, MalhaNaoEncontradaException {
         return this.sondaService.processarInstrucoes(id, instrucoes);
     }
 

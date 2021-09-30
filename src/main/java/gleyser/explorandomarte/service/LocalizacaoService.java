@@ -20,4 +20,8 @@ public class LocalizacaoService {
         Integer coordenadaY = localizacaoDTO.getCoordenadaY();
         return this.localizacaoRepository.findByCoordenadaXAndCoordenadaY(coordenadaX, coordenadaY);
     }
+
+    public void atualizaLocalizacao(Localizacao localizacao){
+        this.localizacaoRepository.save(localizacao);
+    }
 }

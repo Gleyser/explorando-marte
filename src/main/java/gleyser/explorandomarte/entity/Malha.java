@@ -5,6 +5,7 @@ import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -21,12 +22,8 @@ public class Malha {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Localizacao pontoSuperiorDireito;
 
-	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinTable(name = "malha_sonda_mapping",
-			joinColumns = {@JoinColumn(name = "malha_id", referencedColumnName = "id")},
-			inverseJoinColumns = {@JoinColumn(name = "sonda_id", referencedColumnName = "id")})
-	@MapKeyJoinColumn(name = "localizacao_id")
-	private Map<Localizacao, Sonda> sondas;
+	@OneToMany(mappedBy = "malha", cascade = {CascadeType.ALL})
+	private List<Sonda> sondas;
 
 	public Long getId() {
 		return id;
@@ -52,33 +49,16 @@ public class Malha {
 		this.pontoSuperiorDireito = pontoSuperiorDireito;
 	}
 
-	public Map<Localizacao, Sonda> getSondas() {
+	public List<Sonda> getSondas() {
 		return sondas;
 	}
 
-	public void setSondas(Map<Localizacao, Sonda> sondas) {
-		this.sondas = sondas;
-	}
-
-	public Sonda getSonda(Localizacao localizacao) throws SondaNaoEncontradaException {
-		if (!this.sondas.containsKey(localizacao)){
-			throw new SondaNaoEncontradaException();
-		}
-		return this.sondas.get(localizacao);
-	}
-
-	public void salvarSonda(Sonda sonda) throws ColisaoException {
-		if (this.sondas.containsKey(sonda.getLocalizacaoAtual())){
-			throw new ColisaoException();
-		}
-		this.sondas.put(sonda.getLocalizacaoAtual(), sonda);
+	public void adicionaSonda(Sonda sonda) throws ColisaoException {
+		this.sondas.add(sonda);
 	}
 
 	public void removerSonda(Sonda sonda) throws SondaNaoEncontradaException {
-		if (!this.sondas.containsKey(sonda.getLocalizacaoAtual())){
-			throw new SondaNaoEncontradaException();
-		}
-		this.sondas.remove(sonda.getLocalizacaoAtual());
+		this.sondas.remove(sonda);
 	}
 
 	@Override

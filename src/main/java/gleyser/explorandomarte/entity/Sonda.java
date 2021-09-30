@@ -13,7 +13,7 @@ public class Sonda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Localizacao localizacaoAtual;
 
     @Enumerated(EnumType.STRING)
@@ -65,5 +65,28 @@ public class Sonda {
 
     public void setMalha(Malha malha) {
         this.malha = malha;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Sonda sonda = (Sonda) o;
+
+        if (id != null ? !id.equals(sonda.id) : sonda.id != null) return false;
+        if (localizacaoAtual != null ? !localizacaoAtual.equals(sonda.localizacaoAtual) : sonda.localizacaoAtual != null)
+            return false;
+        if (direcao != sonda.direcao) return false;
+        return malha != null ? malha.equals(sonda.malha) : sonda.malha == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (localizacaoAtual != null ? localizacaoAtual.hashCode() : 0);
+        result = 31 * result + (direcao != null ? direcao.hashCode() : 0);
+        result = 31 * result + (malha != null ? malha.hashCode() : 0);
+        return result;
     }
 }
