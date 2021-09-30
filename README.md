@@ -45,12 +45,12 @@ O microserviço possui os seguintes endpoints para o recurso sonda:
 |-------------|:--------------------------------:|-------------------------------------------------------:|
 | GET         |  /api/v1/sondas                  |   Retorna todas as sondas cadastradas                  |
 | GET         |  /api/v1/sondas/{id}             |   Retorna uma sonda com o ID fornecido                 |
-| POST        |  /api/v1/malhas                  |   Salva uma sonda                                      |
-| DELETE      |  /api/v1/malhas/{id}             |   Deleta uma sonda com o ID fornecido                  |
-| PUT         |  /api/v1/malhas/{id}/esquerda    |   Gira a sonda que contém o ID fornecido para esquerda |
-| PUT         |  /api/v1/malhas/{id}/direita     |   Gira a sonda que contém o ID fornecido para direita  |
-| PUT         |  /api/v1/malhas/{id}/mover       |   Move a sonda que contém o ID fornecido               |
-| PUT         |  /api/v1/malhas/{id}/instrucoes  |   Executa instruções na sonda que contém o ID fornecido|
+| POST        |  /api/v1/sondas                  |   Salva uma sonda                                      |
+| DELETE      |  /api/v1/sondas/{id}             |   Deleta uma sonda com o ID fornecido                  |
+| PUT         |  /api/v1/sondas/{id}/esquerda    |   Gira a sonda que contém o ID fornecido para esquerda |
+| PUT         |  /api/v1/sondas/{id}/direita     |   Gira a sonda que contém o ID fornecido para direita  |
+| PUT         |  /api/v1/sondas/{id}/mover       |   Move a sonda que contém o ID fornecido               |
+| PUT         |  /api/v1/sondas/{id}/instrucoes  |   Executa instruções na sonda que contém o ID fornecido|
 
 ### Recurso: malha
 
