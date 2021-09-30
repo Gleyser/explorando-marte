@@ -24,8 +24,7 @@ public class MalhaController {
 	@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MalhaDTO cadastrarMalha(@Valid @RequestBody MalhaDTO malhaDTO) {
-        return this.malhaService.cadastrarMalha(malhaDTO);       		
-        		
+        return this.malhaService.cadastrarMalha(malhaDTO);
     }
 
 	@GetMapping

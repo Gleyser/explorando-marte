@@ -1,8 +1,6 @@
 package gleyser.explorandomarte.controller;
 
-import gleyser.explorandomarte.dto.MalhaDTO;
 import gleyser.explorandomarte.dto.SondaDTO;
-import gleyser.explorandomarte.enums.Acao;
 import gleyser.explorandomarte.exception.ColisaoException;
 import gleyser.explorandomarte.exception.MalhaNaoEncontradaException;
 import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
@@ -38,7 +36,7 @@ public class SondaController {
 
     @GetMapping("/{id}")
     public SondaDTO recuperaSondaPeloId(@PathVariable Long id) throws SondaNaoEncontradaException {
-        return this.sondaService.recuperaSondaPeloId(id);
+        return this.sondaService.retornaSondaDTOPeloId(id);
     }
 
     @DeleteMapping("/{id}")

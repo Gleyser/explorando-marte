@@ -59,7 +59,7 @@ public class Malha {
 	}
 
 	public void salvarSonda(Sonda sonda) {
-		this.sondas.put(sonda.getLocalizacaoAtual(), sonda);
+		this.sondas.put(sonda.getLocalizacao(), sonda);
 	}
 
 	public Sonda retornaSonda(Localizacao localizacao){
@@ -67,7 +67,7 @@ public class Malha {
 	}
 
 	public Sonda removerSonda(Sonda sondaRecuperada) {
-		return this.sondas.remove(sondaRecuperada.getLocalizacaoAtual());
+		return this.sondas.remove(sondaRecuperada.getLocalizacao());
 	}
 
 	@Override

@@ -13,9 +13,8 @@ public class Sonda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
-    private Localizacao localizacaoAtual;
+    private Localizacao localizacao;
 
     @Enumerated(EnumType.STRING)
     private Direcao direcao;
@@ -32,12 +31,12 @@ public class Sonda {
         this.id = id;
     }
 
-    public Localizacao getLocalizacaoAtual() {
-        return localizacaoAtual;
+    public Localizacao getLocalizacao() {
+        return localizacao;
     }
 
-    public void setLocalizacaoAtual(Localizacao localizacaoAtual) {
-        this.localizacaoAtual = localizacaoAtual;
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
     }
 
     public Direcao getDirecao() {
@@ -57,7 +56,7 @@ public class Sonda {
     }
 
     public void mover(){
-        this.localizacaoAtual = this.direcao.movimenta(this.localizacaoAtual);
+        this.localizacao = this.direcao.movimenta(this.localizacao);
     }
 
     public Malha getMalha() {
@@ -76,7 +75,7 @@ public class Sonda {
         Sonda sonda = (Sonda) o;
 
         if (id != null ? !id.equals(sonda.id) : sonda.id != null) return false;
-        if (localizacaoAtual != null ? !localizacaoAtual.equals(sonda.localizacaoAtual) : sonda.localizacaoAtual != null)
+        if (localizacao != null ? !localizacao.equals(sonda.localizacao) : sonda.localizacao != null)
             return false;
         if (direcao != sonda.direcao) return false;
         return malha != null ? malha.equals(sonda.malha) : sonda.malha == null;
@@ -85,7 +84,7 @@ public class Sonda {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (localizacaoAtual != null ? localizacaoAtual.hashCode() : 0);
+        result = 31 * result + (localizacao != null ? localizacao.hashCode() : 0);
         result = 31 * result + (direcao != null ? direcao.hashCode() : 0);
         result = 31 * result + (malha != null ? malha.hashCode() : 0);
         return result;
