@@ -60,13 +60,16 @@ public class MalhaService {
 
 	}
 
-	protected Malha retornaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
+	private Malha retornaMalhaPeloId(Long id) throws MalhaNaoEncontradaException {
 		return this.malhaRepository.findById(id).
 				orElseThrow(() -> new MalhaNaoEncontradaException());
 	}
+<<<<<<< HEAD
 
 	protected Malha salvarMalha(Malha malha){
 		return this.malhaRepository.save(malha);
 	}
 
+=======
+>>>>>>> parent of e11945c (Associando sonda com malha)
 }

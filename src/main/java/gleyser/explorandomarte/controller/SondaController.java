@@ -32,7 +32,11 @@ public class SondaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+<<<<<<< HEAD
     public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) throws MalhaNaoEncontradaException, ColisaoException {
+=======
+    public SondaDTO cadastrarSonda(@Valid @RequestBody SondaDTO sondaDTO) {
+>>>>>>> parent of e11945c (Associando sonda com malha)
         return this.sondaService.cadastrarSonda(sondaDTO);
     }
 

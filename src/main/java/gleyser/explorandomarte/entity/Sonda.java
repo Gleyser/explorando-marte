@@ -13,16 +13,23 @@ public class Sonda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+=======
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+>>>>>>> parent of e11945c (Associando sonda com malha)
     private Localizacao localizacaoAtual;
 
     @Enumerated(EnumType.STRING)
     private Direcao direcao;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "malha_id")
     private Malha malha;
 
+=======
+>>>>>>> parent of e11945c (Associando sonda com malha)
     public Long getId() {
         return id;
     }
@@ -58,6 +65,7 @@ public class Sonda {
     public void mover(){
         this.localizacaoAtual = this.direcao.movimenta(this.localizacaoAtual);
     }
+<<<<<<< HEAD
 
     public Malha getMalha() {
         return malha;
@@ -89,4 +97,6 @@ public class Sonda {
         result = 31 * result + (malha != null ? malha.hashCode() : 0);
         return result;
     }
+=======
+>>>>>>> parent of e11945c (Associando sonda com malha)
 }

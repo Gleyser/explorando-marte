@@ -5,8 +5,11 @@ import gleyser.explorandomarte.exception.SondaNaoEncontradaException;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
+=======
+>>>>>>> parent of e11945c (Associando sonda com malha)
 
 @Entity
 @NoArgsConstructor
@@ -16,6 +19,7 @@ public class Malha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Localizacao pontoInferiorEsquerdo;
 
@@ -25,6 +29,14 @@ public class Malha {
 	@OneToMany(mappedBy = "malha", cascade = {CascadeType.ALL})
 	private List<Sonda> sondas;
 
+=======
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+    private Localizacao pontoInferiorEsquerdo;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+    private Localizacao pontoSuperiorDireito;
+
+>>>>>>> parent of e11945c (Associando sonda com malha)
 	public Long getId() {
 		return id;
 	}
@@ -49,6 +61,7 @@ public class Malha {
 		this.pontoSuperiorDireito = pontoSuperiorDireito;
 	}
 
+<<<<<<< HEAD
 	public List<Sonda> getSondas() {
 		return sondas;
 	}
@@ -61,6 +74,8 @@ public class Malha {
 		this.sondas.remove(sonda);
 	}
 
+=======
+>>>>>>> parent of e11945c (Associando sonda com malha)
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -79,6 +94,4 @@ public class Malha {
 		result = 31 * result + (pontoSuperiorDireito != null ? pontoSuperiorDireito.hashCode() : 0);
 		return result;
 	}
-
-
 }
