@@ -18,6 +18,15 @@ public class Localizacao {
 	@Column(nullable = false)
 	private Integer coordenadaY;
 
+	public Localizacao(Integer coordenadaX, Integer coordenadaY){
+		this.coordenadaX = coordenadaX;
+		this.coordenadaY = coordenadaY;
+	}
+
+	public Localizacao(){
+
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -46,8 +55,9 @@ public class Localizacao {
 		this.coordenadaY++;
 	}
 
-	public void decrementaCoordenadaX(){
-		this.coordenadaX--;
+	public Localizacao decrementaCoordenadaX(){
+		Localizacao retorno = new Localizacao(this.getCoordenadaX(), this.coordenadaX-1);
+		return retorno;
 	}
 
 	public void decrementaCoordenadaY(){

@@ -13,7 +13,9 @@ public class Sonda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+    //@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,  CascadeType.PERSIST, CascadeType.REMOVE})
+    //@Transient
+    //Usar Embedded (verificar a ordem correta)
     private Localizacao localizacao;
 
     @Enumerated(EnumType.STRING)

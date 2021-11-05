@@ -86,6 +86,9 @@ public class SondaService {
     public SondaDTO moverASonda(Long id) throws SondaNaoEncontradaException {
         Sonda sondaASerMovida = retornaSondaPeloId(id);
         sondaASerMovida.mover();
+        sondaASerMovida.getLocalizacao().incrementaCoordenadaX();
+
+
         Sonda sondaMovida = this.sondaRepository.save(sondaASerMovida);
         SondaDTO sondaRetorno = this.sondaMapper.toDTO(sondaMovida);
         return sondaRetorno;

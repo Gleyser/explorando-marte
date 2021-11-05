@@ -28,8 +28,8 @@ public enum Direcao {
         }
 
         public Localizacao movimenta(Localizacao localizacao) {
-            localizacao.decrementaCoordenadaX();
-            return localizacao;
+            Localizacao retorno = localizacao.decrementaCoordenadaX();
+            return retorno;
         }
 
     }
@@ -44,8 +44,8 @@ public enum Direcao {
         }
 
         public Localizacao movimenta(Localizacao localizacao) {
-            localizacao.decrementaCoordenadaY();
-            return localizacao;
+            Localizacao retorno = localizacao.decrementaCoordenadaX();
+            return retorno;
         }
 
     }
